@@ -17,6 +17,7 @@ public class  ARWorld : AndaObjectBasic
      * 
      */
 
+    //？？？？
     //在编辑器模式下使用
     public GameObject CameraFwdPoint;//主摄像头前面的点；
     public GameObject loginMenuBackground;
