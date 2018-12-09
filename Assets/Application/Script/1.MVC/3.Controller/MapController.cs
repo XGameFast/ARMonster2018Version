@@ -553,6 +553,24 @@ public class MapController : BaseController {
     }
     #endregion
 
+    #region 玩家对保卫的据点的选择，。 保卫或者不保卫
+    private void PlayerChooseToProtectBussinessSH(bool _protect)
+    {
+        if(_protect)
+        {
+            JIRVIS.Instance.PlayTips("前往保卫据点");
+
+        }
+        else
+        {
+            JIRVIS.Instance.PlayTips("放弃保卫据点");
+        }
+     
+    }
+    #endregion
+
+  
+
     #region 服务器回调上传编辑的占星庭数据成功
 
     private void CallbackFinishsetStronghold(PlayerStrongholdAttribute playerStrongHoldGrowUpAttribute)
@@ -715,9 +733,14 @@ public class MapController : BaseController {
     private void OpenBussinessStrongholdInformation(StrongholdBaseAttribution _shBase)
     {
         if (data.getCommissionEventContainsBuildstronghold) return;
+        BusinessStrongholdAttribute bsa = (BusinessStrongholdAttribute)_shBase;
+        JIRVIS.Instance.jIRVISData.SetCurrentProtectedStronghold(bsa);
+        JIRVIS.Instance.BuildBussinessStrongholdInfomationBar(bsa);
+        JIRVIS.Instance.jIRVISData.jIRVISContent_Bussiness.callBackPlayerChoose = PlayerChooseToProtectBussinessSH;
     }
 
     #endregion
+  
 
     #region 玩家点击了据点
     private void CallbackSelectItem(Transform item)

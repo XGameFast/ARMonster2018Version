@@ -105,6 +105,7 @@ public static class ONAME
     public static string JIRVISContent_ItemInformation = "JIRVISContent_ItemInformation";
     public static string JIRVISContent_EditorMonsterInformation = "JIRVISContent_EditorMonsterInformation";
     public static string JIRVISContent_RewardBarForNormalReward = "JIRVISContent_RewardBarForNormalReward";
+    public static string JIRVISContent_BussinessStrongholdInfo = "JIRVISContent_BussinessStrongholdInfo";
 
     public static string MallBar = "MallBar";
     public static string ConsumableBar = "ConsumableBar";

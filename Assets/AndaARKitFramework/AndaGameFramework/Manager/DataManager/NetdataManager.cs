@@ -339,6 +339,27 @@ public class NetdataManager : ManagerBase {
     #endregion
 
     #region 获取商家据点的头像
+    public IEnumerator GetStrongholdImg(string adress, System.Action<Sprite> callback)
+    {
+        AndaUIManager.Instance.OpenWaitBoard("请稍等");
+        WWW wWW = new WWW(networkAdress4 + adress);
+        yield return wWW;
+        AndaUIManager.Instance.CloseWaitBoard();
+        if (string.IsNullOrEmpty(wWW.text))
+        {
+            JIRVIS.Instance.PlayTips("有点错误");
+        }
+        else
+        {
+
+            byte[] btye = wWW.texture.EncodeToPNG();
+            Texture2D texture2D = ConvertTool.ConvertToTexture2d(wWW.texture);
+            Sprite sprite = ConvertTool.ConvertToSpriteWithTexture2d(texture2D);
+            string t = ConvertTool.BytesToString(btye);
+            PlayerPrefs.SetString("SH_" + adress, t);
+            callback(sprite);
+        }
+    }
 
     public IEnumerator GetBussinessPorImage(string adress, int strongholdIndex ,System.Action<int,Sprite> callback)
     {

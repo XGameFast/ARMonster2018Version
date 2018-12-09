@@ -91,6 +91,8 @@ public class JIRVISData {
 
     public JIRVISContent_StartVideo iRVISContent_StartVideo ;
 
+    public JIRVISContent_BussinessStrongholdInfo jIRVISContent_Bussiness;
+
     public bool lastChanllengeGameIsWin =false;
     // 代办事项， 0 = 建立据点
     private List<int> WaitForExcuteEvent;
@@ -224,6 +226,14 @@ public class JIRVISData {
         jIRVISContent_EditorMonsterInformation = AndaDataManager.Instance.InstantiateMenu<JIRVISContent_EditorMonsterInformation>(ONAME.JIRVISContent_EditorMonsterInformation);
         jIRVISContent_EditorMonsterInformation.transform.SetUIInto(jIRVISBar.EditorboardPoint.transform);
         jIRVISContent_EditorMonsterInformation.FadeIn();
+    }
+
+    public void BuildBussinessStrongholdBar()
+    {
+        if(jIRVISContent_Bussiness !=null)AndaDataManager.Instance.RecieveItem(jIRVISContent_Bussiness);
+        jIRVISContent_Bussiness = AndaDataManager.Instance.InstantiateMenu<JIRVISContent_BussinessStrongholdInfo>(ONAME.JIRVISContent_BussinessStrongholdInfo);
+        jIRVISContent_Bussiness.transform.SetUIInto(jIRVISBar.EditorboardPoint.transform);
+        jIRVISContent_Bussiness.FadeIn();
     }
 
     public void RemoveMonsterChangeInformaitonBar()

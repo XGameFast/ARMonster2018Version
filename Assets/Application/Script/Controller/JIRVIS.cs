@@ -243,6 +243,15 @@ public class JIRVIS {
 
     #endregion
 
+    #region 打开商家据点详情
+
+    public void BuildBussinessStrongholdInfomationBar(BusinessStrongholdAttribute bsa)
+    {
+        jIRVISData.BuildBussinessStrongholdBar();
+        jIRVISData.jIRVISContent_Bussiness.SetInfo(bsa);
+    }
+
+    #endregion
 
     #region 打开星宿的名字 和 据点修改 面板
     public void BuildEditorBarForMonsterChangeNameOrBelongStorngholdIndex(PlayerMonsterAttribute playerMonsterAttribute , int strongholdIndex , System.Action callbackSure , System.Action callbackCancel)

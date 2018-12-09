@@ -306,6 +306,23 @@ public class AndaDataManager {
         return null;
     }
 
+    public void GetStrongholdImg(string img,System.Action<Sprite> callback)
+    {
+        string s = PlayerPrefs.GetString("SH_" + img);
+        if (s == "")
+        { 
+            naetdataManager.StartCoroutine(naetdataManager.GetStrongholdImg(img,callback));
+        }else
+        {
+            byte[] v = ConvertTool.StringToBytes(s);
+            Texture2D texture = new Texture2D(128, 128);
+            texture.LoadImage(v);
+            texture = ConvertTool.ConvertToTexture2d(texture);
+            Sprite sp = ConvertTool.ConvertToSpriteWithTexture2d(texture);
+            callback(sp);
+        }
+    }
+
     public Sprite GetMedalLevelBoardSprite(string name)
     {
         return objdataManager.GetSprite(name, OTYPE.ObjectsIDType.other);
