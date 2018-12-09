@@ -69,8 +69,10 @@ public class MapController : BaseController {
         {   
             FingerEvent.OnUpdate();
         }
+        #if UNITY_EDITOR 
         MoveCamera();
         RotateCamera();
+        #endif
         //检查据点是否范围内
         //CheckTowerInRect();
         //只有在 放置据点的时候，回去检测与其他据点的位置
@@ -150,7 +152,7 @@ public class MapController : BaseController {
 
     private void RegisterSelectMapItem(bool _isRegister)
     {
-        if(_isRegister)
+       /* if(_isRegister)
         {
             if(FingerEvent.clickSelectItemEvent!= CallbackSelectItem)
             {
@@ -164,7 +166,7 @@ public class MapController : BaseController {
                 FingerEvent.clickSelectItemEvent -= CallbackSelectItem;
             }
            
-        }
+        }*/
     }
 
 
@@ -667,7 +669,55 @@ public class MapController : BaseController {
 
     #endregion
 
+    #region 点击地图上的据点图标
+    public void ClickSelectMapItem(StrongholdBaseAttribution shAttr)
+    {
+        switch(shAttr.hostType)
+        {
+            case 0:
+                if (shAttr.hostIndex == AndaDataManager.Instance.userData.userIndex)
+                {
+                    OpenPlayerStrongholdInformaiton(shAttr);
+                }else
+                {
+                    OpenOtherPlayerStrongholdInformaiton(shAttr);
+                }
+                    
+                break;
+            case 1:
+                OpenBussinessStrongholdInformation(shAttr);
+                break;
+            case 2:
 
+                break;
+        }
+    }
+    #endregion
+
+    #region 打开玩家据点信息面板_自己的
+    private void OpenPlayerStrongholdInformaiton(StrongholdBaseAttribution _shBase)
+    {
+        data.SetCurrentPlayerstrongholdIndex(_shBase.strongholdIndex);
+        JIRVISAskForEnterMineStrongholdNow();
+    }
+
+    #endregion
+
+    #region 打开玩家据点别人的
+    private void OpenOtherPlayerStrongholdInformaiton(StrongholdBaseAttribution _shBase)
+    {
+        JIRVIS.Instance.jIRVISData.SetCurrentChallenggeStronghold((PlayerStrongholdAttribute)_shBase);
+        CallSeverGetSelectStrongholdInfomation();
+    }
+    #endregion
+
+    #region 打开商家据点信息面板
+    private void OpenBussinessStrongholdInformation(StrongholdBaseAttribution _shBase)
+    {
+        if (data.getCommissionEventContainsBuildstronghold) return;
+    }
+
+    #endregion
 
     #region 玩家点击了据点
     private void CallbackSelectItem(Transform item)

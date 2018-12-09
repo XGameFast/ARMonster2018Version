@@ -251,6 +251,10 @@ public class AndaDataManager {
     {
         return objdataManager.GetStrongholdLeveLSprite(strongholdLevel);
     }
+    public Sprite GetBussinessLevelBoardSprite(int shLevel)
+    {
+        return objdataManager.GetBussinessStrongholdLevelSprite(shLevel);
+    }
     public Sprite GetSkillTypeBoardSprite(int skillType)
     {
         return objdataManager.GetSkillBoardSprite(skillType);

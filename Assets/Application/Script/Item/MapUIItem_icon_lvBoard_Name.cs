@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//地图上的据点UI专用
 public class MapUIItem_icon_lvBoard_Name : AndaObjectBasic {
 
     public Image porImg;
@@ -9,16 +10,35 @@ public class MapUIItem_icon_lvBoard_Name : AndaObjectBasic {
     public Text shName;
 
     public int dataIndex;
-    private System.Action<int> clickCallBack;
-    public void SetInfo(int _index,Sprite icon,Sprite _lvBoard,string _shName)
+    private  int shDataType;
+    private StrongholdBaseAttribution strongholdBaseAttribution;
+    private System.Action<StrongholdBaseAttribution> clickCallBack;
+    public void SetInfo(StrongholdBaseAttribution _shAttr)
     {
-        dataIndex =_index;
-        UpdatePorImage(icon);
-        levelboard.sprite = _lvBoard;
-        shName.text = _shName;
+        strongholdBaseAttribution = _shAttr;
+        shDataType = _shAttr.hostType;
+        dataIndex = _shAttr.strongholdIndex;
+        switch(shDataType)
+        {
+            case 0:
+                Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(_shAttr.statueID.ToString());
+                Sprite levelBoard = AndaDataManager.Instance.GetStrongholdLevelBoardSprite(_shAttr.strongholdLevel);
+                UpdatePorImage(imgPor);
+                levelboard.sprite = levelBoard;
+                break;
+            case 1:
+               // Sprite imgPor = AndaDataManager.Instance AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
+               levelboard.sprite = AndaDataManager.Instance.GetBussinessLevelBoardSprite(_shAttr.strongholdLevel); ;
+                break;
+            case 2:
+                break;
+        }
+       
+
+        shName.text = _shAttr.strongholdNickName;
     }
 
-    public void RegisterClickCallBack(System.Action<int> callback)
+    public void RegisterClickCallBack(System.Action<StrongholdBaseAttribution> callback)
     {
         clickCallBack = callback;
     }
@@ -32,7 +52,7 @@ public class MapUIItem_icon_lvBoard_Name : AndaObjectBasic {
     {
         if(clickCallBack!=null)
         {
-            clickCallBack(dataIndex);
+            clickCallBack(strongholdBaseAttribution);
         }
     }
 }

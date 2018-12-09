@@ -288,9 +288,8 @@ public class MapCtrData : ControllerData {
             PlayerStrongholdAttribute p = selfPlayerStrongholdAttributes[i];
             MapUIItem_icon_lvBoard_Name _item = AndaDataManager.Instance.InstantiateMenu<MapUIItem_icon_lvBoard_Name>(ONAME.MapUIItemShboard_PlayerSH);
             _item.transform.SetInto(mapMenu.itemBox);
-            Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
-            Sprite levelBoard = AndaDataManager.Instance.GetStrongholdLevelBoardSprite(p.strongholdLevel);
-            _item.SetInfo(p.strongholdIndex, imgPor, levelBoard, p.strongholdNickName);
+            _item.SetInfo(p);
+            _item.RegisterClickCallBack(mapController.ClickSelectMapItem);
             if (minePlayerStrongholdItems == null) minePlayerStrongholdItems = new List<MapUIItem_icon_lvBoard_Name>();
             minePlayerStrongholdItems.Add(_item);
         }
@@ -305,9 +304,8 @@ public class MapCtrData : ControllerData {
             PlayerStrongholdAttribute p = otherPlayerStrongholdAttributes[i];
             MapUIItem_icon_lvBoard_Name _item = AndaDataManager.Instance.InstantiateMenu<MapUIItem_icon_lvBoard_Name>(ONAME.MapUIItemShboard_PlayerSH);
             _item.transform.SetInto(mapMenu.itemBox);
-            Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
-            Sprite levelBoard = AndaDataManager.Instance.GetStrongholdLevelBoardSprite(p.strongholdLevel);
-            _item.SetInfo(p.strongholdIndex, imgPor, levelBoard, p.strongholdNickName);
+            _item.SetInfo(p);
+            _item.RegisterClickCallBack(mapController.ClickSelectMapItem);
             if (otherPlayerStrongholdItems == null) otherPlayerStrongholdItems = new List<MapUIItem_icon_lvBoard_Name>();
             otherPlayerStrongholdItems.Add(_item);
         }
@@ -323,9 +321,10 @@ public class MapCtrData : ControllerData {
             BusinessStrongholdAttribute p = bussinessStrongholdAttributes[i];
             MapUIItem_icon_lvBoard_Name _item = AndaDataManager.Instance.InstantiateMenu<MapUIItem_icon_lvBoard_Name>(ONAME.MapUIItemShboard_BussinesssSH);
             _item.transform.SetInto(mapMenu.itemBox);
-            //Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
+            Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
             Sprite levelBoard = AndaDataManager.Instance.objdataManager.GetBussinessStrongholdLevelSprite(p.strongholdLevel);
-            _item.SetInfo(p.strongholdIndex, null, levelBoard, p.strongholdNickName);
+            _item.SetInfo(p);
+            _item.RegisterClickCallBack(mapController.ClickSelectMapItem);
             if (businessStrongholdItems == null) businessStrongholdItems = new List<MapUIItem_icon_lvBoard_Name>();
             businessStrongholdItems.Add(_item);
         }
@@ -426,9 +425,7 @@ public class MapCtrData : ControllerData {
         PlayerStrongholdAttribute p = selfPlayerStrongholdAttributes.FirstOrDefault(s=>s.strongholdIndex == _pma.strongholdIndex);
         MapUIItem_icon_lvBoard_Name _item = AndaDataManager.Instance.InstantiateMenu<MapUIItem_icon_lvBoard_Name>(ONAME.MapUIItemShboard_PlayerSH);
         _item.transform.SetInto(mapMenu.itemBox);
-        Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
-        Sprite levelBoard = AndaDataManager.Instance.GetStrongholdLevelBoardSprite(p.strongholdLevel);
-        _item.SetInfo(p.strongholdIndex, imgPor, levelBoard, p.strongholdNickName);
+        _item.SetInfo(p);
         if (minePlayerStrongholdItems == null) minePlayerStrongholdItems = new List<MapUIItem_icon_lvBoard_Name>();
         minePlayerStrongholdItems.Add(_item);
     }

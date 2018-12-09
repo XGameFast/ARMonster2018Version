@@ -40,34 +40,7 @@ public class MapMenu : UIBasic2 {
         base.OnDispawn();
     }
 
-    public void BuildMapItem(List<PlayerStrongholdAttribute> players, List<BusinessStrongholdAttribute> bussiness)
-    {
-        //构建玩家据点
-        int count = players.Count;
-        for(int i = 0 ; i <count; i ++)
-        {
-            PlayerStrongholdAttribute p = players[i];
-            MapUIItem_icon_lvBoard_Name _item = AndaDataManager.Instance.InstantiateMenu<MapUIItem_icon_lvBoard_Name>(ONAME.MapUIItemShboard_PlayerSH);
-            _item.transform.SetInto(itemBox);
-             Sprite imgPor = AndaDataManager.Instance.GetStrongholdPorSprite(p.statueID.ToString());
-            Sprite levelBoard = AndaDataManager.Instance.GetStrongholdLevelBoardSprite(p.strongholdLevel);
-            _item.SetInfo(p.strongholdIndex,imgPor,levelBoard,p.strongholdNickName);
-            if(playerItem == null) playerItem =new List<MapUIItem_icon_lvBoard_Name>();
-            playerItem.Add(_item);
-        }
 
-        count = bussiness.Count;
-        for(int i = 0 ; i < count; i++)
-        {
-            BusinessStrongholdAttribute b = bussiness[i];
-            MapUIItem_icon_lvBoard_Name _item = AndaDataManager.Instance.InstantiateMenu<MapUIItem_icon_lvBoard_Name>(ONAME.MapUIItemShboard_PlayerSH);
-            _item.transform.SetInto(itemBox);
-            Sprite levelBoard = AndaDataManager.Instance.objdataManager.GetBussinessStrongholdLevelSprite(b.strongholdLevel);
-            _item.SetInfo(b.strongholdIndex,null, levelBoard,b.strongholdNickName);
-            if(bussniessItem == null)bussniessItem = new List<MapUIItem_icon_lvBoard_Name>();
-            bussniessItem.Add(_item);
-        }
-    }
 
    
 
